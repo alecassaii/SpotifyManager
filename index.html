@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>FamilyPlan</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="hdr">
+  <h1>Family Plan</h1>
+  <div id="hdr-date" class="date-label"></div>
+</header>
+
+<main id="pg-dash" class="page active">
+  <section class="bal-card">
+    <div class="bal-section">
+      <p class="lbl">Saldo Carta</p>
+      <h2 id="card-num">€0,00</h2>
+      <button class="btn-sm" onclick="handleCard('set')">Modifica</button>
+      <button class="btn-sm btn-accent" onclick="handleCard('renew')">Rinnova</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="bal-section">
+      <p class="lbl">Saldo Budget</p>
+      <h2 id="budget-num">€0,00</h2>
+      <button class="btn-sm btn-accent" onclick="handleCard('transfer')">Carica su Carta</button>
+    </div>
+  </section>
+
+  <p class="lbl">Membri</p>
+  <div id="mem-grid" class="grid"></div>
+</main>
+
+<main id="pg-hist" class="page">
+  <p class="lbl">Storico Operazioni</p>
+  <div id="tx-list" class="list"></div>
+</main>
+
+<main id="pg-set" class="page">
+  <p class="lbl">Azioni</p>
+  <div class="settings-box">
+    <button onclick="exportData()">Esporta Backup</button>
+    <button onclick="resetAll()" class="btn-danger">Azzera Dati</button>
+  </div>
+</main>
+
+<nav class="nav">
+  <button onclick="navTo('dash')">Home</button>
+  <button onclick="navTo('hist')">Storico</button>
+  <button onclick="navTo('set')">Info</button>
+</nav>
+
+<div id="pay-modal" class="modal-overlay">
+  <div class="modal">
+    <h3>Registra Quota</h3>
+    <p id="modal-name" style="margin-bottom: 20px; color: #1DB954;"></p>
+    <div class="pkg-select">
+      <button onclick="confirmPay(1)">1 Mese (3,50€)</button>
+      <button onclick="confirmPay(2)">2 Mesi (7,00€)</button>
+      <button onclick="confirmPay(4)">4 Mesi (14,00€)</button>
+    </div>
+    <button onclick="closeModals()" class="btn-close">Annulla</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
