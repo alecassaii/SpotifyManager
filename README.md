@@ -1,66 +1,25 @@
 # Spotify Family Plan Tracker
 
-Webapp PWA per gestire i costi del piano Spotify Family.
+Webapp in formato **PWA (Progressive Web App)** progettata per centralizzare la gestione finanziaria e le scadenze di un abbonamento Spotify Family condiviso.
 
-## Deploy su GitHub Pages (gratuito)
+## Funzionalità Principali
 
-### 1. Crea il repo
-- Vai su [github.com](https://github.com) → **New repository**
-- Nome: `spotify-family` (o quello che vuoi)
-- Visibilità: **Private** (consigliato, i dati sono nel browser ma per sicurezza)
-- Clicca **Create repository**
+* **Gestione Finanziaria Bifronte:** Monitoraggio separato del saldo reale sulla carta prepagata e del "budget virtuale" raccolto dai partecipanti.
+* **Tracciamento Scadenze Membri:** Calcolo automatico delle date di scadenza per ogni singolo profilo basato sui mesi pagati.
+* **Logica dei Flussi di Cassa:**
+    * Registrazione delle quote dei membri nel budget.
+    * Trasferimento fondi dal budget alla carta per ricariche fisiche.
+    * Registrazione del rinnovo automatico dell'abbonamento con detrazione dal saldo carta.
+* **Storico Operazioni:** Registro cronologico di tutti i movimenti (entrate, ricariche, rinnovi).
+* **Supporto Offline:** Grazie al Service Worker, l'app funziona anche senza connessione internet dopo la prima installazione.
 
-### 2. Carica i file
-Trascina nella pagina del repo questi file:
-```
-index.html
-manifest.json
-sw.js
-icon-192.png
-icon-512.png
-```
-Oppure usa Git:
-```bash
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/TUO-USERNAME/spotify-family.git
-git push -u origin main
-```
+## Gestione dei Dati
 
-### 3. Attiva GitHub Pages
-- Vai in **Settings** → **Pages**
-- Source: **Deploy from a branch**
-- Branch: `main` → `/root`
-- Clicca **Save**
+* **Privacy Locale:** Tutti i dati sono salvati esclusivamente nel `localStorage` del browser dell'utente. Nessuna informazione viene inviata a server esterni.
+* **Portabilità:** Sistema integrato di backup tramite esportazione e importazione di file JSON per trasferire i dati tra diversi dispositivi o browser.
 
-Dopo 1-2 minuti l'app sarà disponibile su:
-`https://TUO-USERNAME.github.io/spotify-family/`
+## Componenti del Progetto
 
-### 4. Installa come app sul telefono
-**iPhone (Safari):**
-1. Apri il link in Safari
-2. Tocca l'icona di condivisione (□↑)
-3. Seleziona "Aggiungi alla schermata Home"
-
-**Android (Chrome):**
-1. Apri il link in Chrome
-2. Comparirà automaticamente il banner "Installa app"
-3. Oppure: menu ⋮ → "Aggiungi alla schermata Home"
-
-## Dati & Backup
-- I dati sono salvati nel `localStorage` del browser (solo su quel device)
-- Usa **Esporta JSON** nelle impostazioni per fare backup
-- Usa **Importa JSON** per ripristinare su un altro device
-
-## Struttura file
-```
-spotify-family/
-├── index.html       ← app completa
-├── manifest.json    ← configurazione PWA
-├── sw.js            ← service worker (offline)
-├── icon-192.png     ← icona app
-├── icon-512.png     ← icona app HD
-└── README.md        ← questa guida
-```
+* **Interfaccia Utente:** Layout reattivo ottimizzato per l'uso mobile (Mobile-First), installabile come app nativa su iOS e Android.
+* **PWA Core:** Configurazione tramite `manifest.json` e `sw.js` per garantire l'installazione sulla schermata Home e la gestione della cache.
+* **Asset Visivi:** Icone dedicate per garantire una corretta visualizzazione su diverse densità di pixel e sistemi operativi.
