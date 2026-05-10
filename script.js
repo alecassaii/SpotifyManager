@@ -38,7 +38,7 @@ function updateUI() {
                 <span class="status" style="color: ${isExp ? 'var(--red)' : 'var(--accent)'}">
                     ${isExp ? 'Scaduto' : 'Fino al ' + dateStr}
                 </span>
-                <button style="width:100%; font-size:0.8rem" onclick="openPayModal(${m.id})">Paga</button>
+                <button class="btn-sm" style="width:100%; font-size:0.8rem" onclick="openPayModal(${m.id})">Paga</button>
             </div>
         `;
     }).join('');
