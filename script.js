@@ -48,7 +48,7 @@ function updateUI() {
     hist.innerHTML = S.history.map(t => `
         <div style="background:#121212; padding:12px; margin-bottom:5px; border-radius:8px; display:flex; justify-content:space-between">
             <div><small>${t.date}</small><br>${t.desc}</div>
-            <div style="font-weight:bold">${t.amt > 0 ? '+' : ''}${fmt(t.amt)}</div>
+            <div style="font-weight:bold; color: ${t.amt >= 0 ? 'var(--accent)' : 'var(--red)'};">${t.amt >= 0 ? '+' : '-'}€${Math.abs(t.amt / 100).toFixed(2).replace('.', ',')}</div>
         </div>
     `).reverse().slice(0, 15).join('');
 }
