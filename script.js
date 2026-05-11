@@ -13,38 +13,12 @@ const INITIAL_STATE = {
     history: []
 };
 
-let S = JSON.parse(JSON.stringify(INITIAL_STATE));
+let S = JSON.parse(localStorage.getItem('family_plan_v1')) || INITIAL_STATE;
 let selectedMemberId = null;
 
-// Firebase Configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDg7bEVFfvzkkXqahV5SIdpYpwsp0c9MsU",
-  authDomain: "spotifymanagers.firebaseapp.com",
-  projectId: "spotifymanagers",
-  storageBucket: "spotifymanagers.firebasestorage.app",
-  messagingSenderId: "197556130316",
-  appId: "1:197556130316:web:253480e58745301592d429",
-  measurementId: "G-3R3XNS5RKQ"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
 // Utility: salvataggio e formattazione
-const save = () => db.ref('/').set(S);
+const save = () => localStorage.setItem('family_plan_v1', JSON.stringify(S));
 const fmt = (v) => "€" + (v / 100).toFixed(2).replace('.', ',');
-
-// Load data from Firebase on startup
-db.ref('/').on('value', (snapshot) => {
-    if (snapshot.exists()) {
-        S = snapshot.val();
-    } else {
-        S = JSON.parse(JSON.stringify(INITIAL_STATE));
-        save();
-    }
-    updateUI();
-});
 
 // Aggiornamento Interfaccia
 function updateUI() {
@@ -112,7 +86,7 @@ function handleCard(mode) {
             addHistory("Rinnovo Spotify Family", -costoRinnovo);
             break;
     }
-    save();
+    save(); updateUI();
 }
 
 // Gestione Pagamento Membri
@@ -128,7 +102,7 @@ function confirmPay(months) {
 
     // Aggiorna data scadenza - sempre dal 9 del mese corrente/prossimo
     let baseDate = new Date();
-    baseDate.setDate(9);
+    baseDate.setDate(9); // Imposta sempre al 9
 
     // Se la data di scadenza è ancora futura, usa quella come base
     if (mem.expiry && new Date(mem.expiry) > new Date()) {
@@ -142,8 +116,7 @@ function confirmPay(months) {
     S.budgetBalance += amt;
 
     addHistory(`Quota ${mem.name} (${months}m)`, amt);
-    save();
-    closeModals();
+    save(); updateUI(); closeModals();
 }
 
 function addHistory(desc, amt) {
@@ -159,12 +132,8 @@ function exportData() {
     link.href = data; link.download = "backup_family.json"; link.click();
 }
 
-function resetAll() {
-    if(confirm("Eliminare tutti i dati?")) {
-        S = JSON.parse(JSON.stringify(INITIAL_STATE));
-        save();
-    }
-}
+function resetAll() { if(confirm("Eliminare tutti i dati?")) { S = INITIAL_STATE; save(); updateUI(); } }
 
 // Inizializzazione
 document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('it-IT', {day:'2-digit', month:'short'});
+updateUI();
