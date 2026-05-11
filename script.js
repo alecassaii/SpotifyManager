@@ -1,21 +1,3 @@
-// Firebase Configuration
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDg7bEVFfvzkkXqahV5SIdpYpwsp0c9MsU",
-  authDomain: "spotifymanagers.firebaseapp.com",
-  projectId: "spotifymanagers",
-  storageBucket: "spotifymanagers.firebasestorage.app",
-  messagingSenderId: "197556130316",
-  appId: "1:197556130316:web:253480e58745301592d429",
-  measurementId: "G-3R3XNS5RKQ"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
 // Stato iniziale
 const INITIAL_STATE = {
     cardBalance: 0,
@@ -34,12 +16,27 @@ const INITIAL_STATE = {
 let S = JSON.parse(JSON.stringify(INITIAL_STATE));
 let selectedMemberId = null;
 
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDg7bEVFfvzkkXqahV5SIdpYpwsp0c9MsU",
+  authDomain: "spotifymanagers.firebaseapp.com",
+  projectId: "spotifymanagers",
+  storageBucket: "spotifymanagers.firebasestorage.app",
+  messagingSenderId: "197556130316",
+  appId: "1:197556130316:web:253480e58745301592d429",
+  measurementId: "G-3R3XNS5RKQ"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
 // Utility: salvataggio e formattazione
-const save = () => set(ref(db, 'family_plan'), S);
+const save = () => db.ref('family_plan').set(S);
 const fmt = (v) => "€" + (v / 100).toFixed(2).replace('.', ',');
 
 // Load data from Firebase on startup
-onValue(ref(db, 'family_plan'), (snapshot) => {
+db.ref('family_plan').on('value', (snapshot) => {
     if (snapshot.exists()) {
         S = snapshot.val();
     } else {
@@ -146,7 +143,6 @@ function confirmPay(months) {
 
     addHistory(`Quota ${mem.name} (${months}m)`, amt);
     save();
-    updateUI();
     closeModals();
 }
 
