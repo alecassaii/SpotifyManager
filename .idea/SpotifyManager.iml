@@ -9,5 +9,8 @@
     <orderEntry type="library" name="firebase-app" level="application" />
     <orderEntry type="library" name="firebase-database" level="application" />
     <orderEntry type="library" name="firebase-analytics" level="application" />
+    <orderEntry type="library" name="firebase-app-compat" level="application" />
+    <orderEntry type="library" name="firebase-database-compat" level="application" />
+    <orderEntry type="library" name="firebase-analytics-compat" level="application" />
   </component>
 </module>

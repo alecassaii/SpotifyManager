@@ -32,11 +32,11 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // Utility: salvataggio e formattazione
-const save = () => db.ref('family_plan').set(S);
+const save = () => db.ref('/').set(S);
 const fmt = (v) => "€" + (v / 100).toFixed(2).replace('.', ',');
 
 // Load data from Firebase on startup
-db.ref('family_plan').on('value', (snapshot) => {
+db.ref('/').on('value', (snapshot) => {
     if (snapshot.exists()) {
         S = snapshot.val();
     } else {
