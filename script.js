@@ -100,8 +100,15 @@ function confirmPay(months) {
     const amt = months === 1 ? 350 : months === 2 ? 700 : 1400;
     const mem = S.members[selectedMemberId];
 
-    // Aggiorna data scadenza
-    let baseDate = (mem.expiry && new Date(mem.expiry) > new Date()) ? new Date(mem.expiry) : new Date();
+    // Aggiorna data scadenza - sempre dal 9 del mese corrente/prossimo
+    let baseDate = new Date();
+    baseDate.setDate(9); // Imposta sempre al 9
+
+    // Se la data di scadenza è ancora futura, usa quella come base
+    if (mem.expiry && new Date(mem.expiry) > new Date()) {
+        baseDate = new Date(mem.expiry);
+    }
+
     baseDate.setMonth(baseDate.getMonth() + months);
     mem.expiry = baseDate.toISOString();
 
