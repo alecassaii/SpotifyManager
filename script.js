@@ -24,9 +24,9 @@ const fmt = (v) => "€" + (v / 100).toFixed(2).replace('.', ',');
 function updateUI() {
     // Aggiorna numeri principali
     document.getElementById('card-num').textContent = fmt(S.cardBalance);
-    document.getElementById('budget-num').textContent = fmt(S.budgetBalance);
     document.getElementById('card-num').style.color = S.cardBalance < 0 ? 'var(--red)' : 'white';
-    document.getElementById('budget-num').style.color = S.cardBalance < 0 ? 'var(--red)' : 'white';
+    document.getElementById('budget-num').textContent = fmt(S.budgetBalance);
+    document.getElementById('budget-num').style.color = S.budgetBalance < 0 ? 'var(--red)' : 'white';
 
     // Lista membri
     const grid = document.getElementById('mem-grid');
