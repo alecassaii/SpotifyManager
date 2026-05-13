@@ -72,7 +72,11 @@ function handleCard(mode) {
             const val2 = prompt(`Quanto vuoi spostare dal Budget (€${(S.budgetBalance/100).toFixed(2)}) alla Carta?`);
             if (!val2) return;
             const amt = Math.round(parseFloat(val2.replace(',', '.')) * 100);
-            if (amt > S.budgetBalance) { alert("Budget insufficiente!"); return; }
+            if (amt > S.budgetBalance) {
+                // alert("Budget insufficiente!");
+                // return;
+                if (!confirm("Budget insufficiente. Trasferire comunque?")) return;
+            }
             S.budgetBalance -= amt;
             S.cardBalance += amt;
             addHistory("Trasferimento su Carta", amt);
