@@ -6,10 +6,10 @@ Webapp in formato **PWA (Progressive Web App)** progettata per centralizzare la 
 
 * **Gestione Finanziaria Bifronte:** Monitoraggio separato del saldo reale sulla carta prepagata e del "budget virtuale" raccolto dai partecipanti.
 * **Tracciamento Scadenze Membri:** Calcolo automatico delle date di scadenza per ogni singolo profilo basato sui mesi pagati.
-* **Logica dei Flussi di Cassa:**
+* **Logica della cassa:**
     * Registrazione delle quote dei membri nel budget.
     * Trasferimento fondi dal budget alla carta per ricariche fisiche.
-    * Registrazione del rinnovo automatico dell'abbonamento con detrazione dal saldo carta.
+    * Registrazione del rinnovo automatico dell'abbonamento con detrazione dal saldo carta. (Work In Progress)
 * **Storico Operazioni:** Registro cronologico di tutti i movimenti (entrate, ricariche, rinnovi).
 * **Supporto Offline:** Grazie al Service Worker, l'app funziona anche senza connessione internet dopo la prima installazione.
 
