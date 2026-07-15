@@ -4,9 +4,9 @@ const INITIAL_STATE = {
     budgetBalance: 0,
     members: [
         { id: 0, name: 'Cassa', expiry: null },
-        { id: 1, name: 'Pape', expiry: null },
+        { id: 1, name: 'Dario', expiry: null },
         { id: 2, name: 'Ucio', expiry: null },
-        { id: 3, name: 'Ucio Jr', expiry: null },
+        { id: 3, name: 'Damiano', expiry: null },
         { id: 4, name: 'Emma', expiry: null },
         { id: 5, name: 'Landi', expiry: null }
     ],
